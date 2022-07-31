@@ -1,0 +1,5 @@
+spring:
+  r2dbc:
+    url: <your-mysql-database-url>
+    username: <your-database-username>
+    password: <your-database-password>
