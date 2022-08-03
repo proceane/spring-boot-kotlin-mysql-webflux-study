@@ -10,7 +10,7 @@ data class Author(
     @Column("first_name") var firstName: String,
     @Column("last_name") var lastName: String,
     var email: String,
-    var birthdate: LocalDate,
+    @Column("birth_date") var birthDate: LocalDate?,
     @Column("created_at") var createdAt: LocalDateTime
 ) {
 }
