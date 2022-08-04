@@ -24,5 +24,22 @@ class AuthorDto {
                 )
             }
         }
+
+        data class Post(
+            var firstName: String,
+            var lastName: String,
+            var email: String,
+            var birthdate: LocalDate?
+        ) {
+        }
+
+        data class Put(
+            var firstName: String,
+            var lastName: String,
+            var email: String,
+            var birthdate: LocalDate?
+        ) {
+        }
+
     }
 }
