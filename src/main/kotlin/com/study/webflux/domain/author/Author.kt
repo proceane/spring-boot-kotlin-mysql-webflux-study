@@ -13,4 +13,14 @@ data class Author(
     @Column("birth_date") var birthDate: LocalDate?,
     @Column("created_at") var createdAt: LocalDateTime
 ) {
+    companion object {
+        fun createAuthor(firstName: String, lastName: String, email: String, birthDate: LocalDate?): Author = Author(
+            null,
+            firstName,
+            lastName,
+            email,
+            birthDate,
+            LocalDateTime.now()
+        )
+    }
 }
