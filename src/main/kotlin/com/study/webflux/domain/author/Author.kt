@@ -23,4 +23,11 @@ data class Author(
             LocalDateTime.now()
         )
     }
+
+    fun updateAuthor(firstName: String, lastName: String, email: String, birthDate: LocalDate?) {
+        this.firstName = firstName
+        this.lastName = lastName
+        this.email = email
+        this.birthDate = birthDate
+    }
 }

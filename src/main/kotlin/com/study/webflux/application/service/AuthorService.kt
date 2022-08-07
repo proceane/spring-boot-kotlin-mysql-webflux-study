@@ -17,6 +17,9 @@ class AuthorService(val authorRepository: AuthorRepository) {
             .map { AuthorDto.Response.Get.of(it) }
     }
 
+    fun delete(id: Int) {
+        authorRepository.deleteById(id)
+    }
 
 }
 
