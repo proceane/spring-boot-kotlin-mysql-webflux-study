@@ -11,17 +11,15 @@ class AuthorDto {
             var firstName: String,
             var lastName: String,
             var email: String,
-            var birthdate: LocalDate?
-        ) {
-        }
+            var birthDate: LocalDate?
+        )
 
         data class Patch(
             var firstName: String,
             var lastName: String,
             var email: String,
             var birthdate: LocalDate?
-        ) {
-        }
+        )
     }
 
     class Response {
