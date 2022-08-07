@@ -15,7 +15,7 @@ class AuthorDto {
         ) {
         }
 
-        data class Put(
+        data class Patch(
             var firstName: String,
             var lastName: String,
             var email: String,
