@@ -9,9 +9,12 @@ import reactor.core.publisher.Mono
 class AuthorControllerV1(val authorService: AuthorService) {
 
     @GetMapping("/author/v1/{id}")
-    fun get(@PathVariable id: Int) : Mono<AuthorDto.Response.Get> = authorService.get(id)
+    fun get(@PathVariable id: Int): Mono<AuthorDto.Response.Get> = authorService.get(id)
 
     @PostMapping("/author/v1")
     fun post(@RequestBody dto: AuthorDto.Request.Post): Mono<AuthorDto.Response.Get> = authorService.post(dto)
+
+    @DeleteMapping("/author/v1/{id}")
+    fun delete(@PathVariable id: Int) = authorService.delete(id)
 
 }
