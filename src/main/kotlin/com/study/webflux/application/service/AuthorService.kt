@@ -18,7 +18,7 @@ class AuthorService(val authorRepository: AuthorRepository) {
     }
 
     fun delete(id: Int) {
-        authorRepository.deleteById(id)
+        authorRepository.deleteById(id).subscribe()
     }
 
 }
