@@ -24,10 +24,10 @@ data class Author(
         )
     }
 
-    fun updateAuthor(firstName: String, lastName: String, email: String, birthDate: LocalDate?) {
-        this.firstName = firstName
-        this.lastName = lastName
-        this.email = email
-        this.birthDate = birthDate
+    fun updateAuthor(firstName: String?, lastName: String?, email: String?, birthDate: LocalDate?) {
+        firstName?.let { this.firstName = firstName }
+        lastName?.let { this.lastName = lastName}
+        email?.let { this.email = email }
+        birthDate?.let { this.birthDate = birthDate }
     }
 }
