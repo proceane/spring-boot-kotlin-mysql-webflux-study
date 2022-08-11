@@ -14,6 +14,10 @@ class AuthorControllerV1(val authorService: AuthorService) {
     @PostMapping("/author/v1")
     fun post(@RequestBody dto: AuthorDto.Request.Post): Mono<AuthorDto.Response.Get> = authorService.post(dto)
 
+    @PatchMapping("/author/v1/{id}")
+    fun patch(@PathVariable id: Int, @RequestBody dto: AuthorDto.Request.Patch): Mono<AuthorDto.Response.Get> =
+        authorService.patch(id, dto)
+
     @DeleteMapping("/author/v1/{id}")
     fun delete(@PathVariable id: Int) = authorService.delete(id)
 
