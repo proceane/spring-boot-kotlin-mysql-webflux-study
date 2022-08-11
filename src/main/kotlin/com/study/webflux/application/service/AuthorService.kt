@@ -17,6 +17,13 @@ class AuthorService(val authorRepository: AuthorRepository) {
             .map { AuthorDto.Response.Get.of(it) }
     }
 
+    fun patch(id: Int, dto: AuthorDto.Request.Patch): Mono<AuthorDto.Response.Get> {
+        return authorRepository.findById(id).flatMap {
+            it.updateAuthor(dto.firstName, dto.lastName, dto.email, dto.birthDate)
+            authorRepository.save(it)
+        }.map { AuthorDto.Response.Get.of(it) }
+    }
+
     fun delete(id: Int) {
         authorRepository.deleteById(id).subscribe()
     }

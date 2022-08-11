@@ -15,9 +15,9 @@ class AuthorDto {
         )
 
         data class Patch(
-            var firstName: String,
-            var lastName: String,
-            var email: String,
+            var firstName: String?,
+            var lastName: String?,
+            var email: String?,
             var birthDate: LocalDate?
         )
     }
