@@ -4,12 +4,16 @@ import com.study.webflux.domain.author.Author
 import com.study.webflux.infra.repository.AuthorRepository
 import com.study.webflux.presentation.dto.AuthorDto
 import org.springframework.stereotype.Service
+import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 @Service
 class AuthorService(val authorRepository: AuthorRepository) {
 
     fun get(id: Int): Mono<AuthorDto.Response.Get> = authorRepository.findById(id)
+        .map { AuthorDto.Response.Get.of(it) }
+
+    fun getAll(): Flux<AuthorDto.Response.Get> = authorRepository.findAll()
         .map { AuthorDto.Response.Get.of(it) }
 
     fun post(dto: AuthorDto.Request.Post): Mono<AuthorDto.Response.Get> {
