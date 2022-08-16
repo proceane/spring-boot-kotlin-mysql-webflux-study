@@ -1,5 +1,6 @@
 package com.study.webflux.presentation.dto
 
+import com.study.webflux.domain.post.Post
 import java.time.LocalDateTime
 
 class PostDto {
@@ -26,6 +27,17 @@ class PostDto {
             var description: String,
             var content: String,
             var createdAt: LocalDateTime
-        )
+        ) {
+            companion object {
+                fun of(post: Post): Get = Get(
+                    post.id,
+                    post.authorId,
+                    post.title,
+                    post.description,
+                    post.content,
+                    post.createdAt
+                )
+            }
+        }
     }
 }
