@@ -12,4 +12,14 @@ data class Post(
     var content: String,
     @Column("created_at") var createdAt: LocalDateTime
 ) {
+    companion object {
+        fun createPost(authorId: Int, title: String, description: String, content: String): Post = Post(
+            null,
+            authorId,
+            title,
+            description,
+            content,
+            LocalDateTime.now()
+        )
+    }
 }
