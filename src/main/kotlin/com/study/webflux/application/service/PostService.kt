@@ -1,5 +1,6 @@
 package com.study.webflux.application.service
 
+import com.study.webflux.domain.post.Post
 import com.study.webflux.infra.repository.PostRepository
 import com.study.webflux.presentation.dto.PostDto
 import org.springframework.stereotype.Service
@@ -15,4 +16,8 @@ class PostService(val postRepository: PostRepository) {
     fun getAll(): Flux<PostDto.Response.Get> = postRepository.findAll()
         .map { PostDto.Response.Get.of(it) }
 
+    fun post(authorId: Int, dto: PostDto.Request.Post): Mono<PostDto.Response.Get> {
+        return postRepository.save(Post.createPost(authorId, dto.title, dto.description, dto.content))
+            .map { PostDto.Response.Get.of(it) }
+    }
 }
