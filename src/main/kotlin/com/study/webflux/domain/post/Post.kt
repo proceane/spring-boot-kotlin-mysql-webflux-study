@@ -22,4 +22,10 @@ data class Post(
             LocalDateTime.now()
         )
     }
+
+    fun updatePost(title: String?, description: String?, content: String?) {
+        title?.let { this.title = title }
+        description?.let { this.description = description }
+        content?.let { this.content = content }
+    }
 }
