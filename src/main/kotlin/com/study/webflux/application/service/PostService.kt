@@ -20,4 +20,11 @@ class PostService(val postRepository: PostRepository) {
         return postRepository.save(Post.createPost(authorId, dto.title, dto.description, dto.content))
             .map { PostDto.Response.Get.of(it) }
     }
+
+    fun patch(id: Int, dto: PostDto.Request.Patch): Mono<PostDto.Response.Get> {
+        return postRepository.findById(id).flatMap {
+            it.updatePost(dto.title, dto.description, dto.content)
+            postRepository.save(it)
+        }.map { PostDto.Response.Get.of(it) }
+    }
 }
