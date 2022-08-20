@@ -27,4 +27,8 @@ class PostService(val postRepository: PostRepository) {
             postRepository.save(it)
         }.map { PostDto.Response.Get.of(it) }
     }
+    
+    fun delete(id: Int) {
+        postRepository.deleteById(id).subscribe()
+    }
 }
