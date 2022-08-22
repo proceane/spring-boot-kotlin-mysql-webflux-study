@@ -11,20 +11,20 @@ import reactor.core.publisher.Mono
 @RequestMapping
 class AuthorControllerV1(val authorService: AuthorService) {
 
-    @GetMapping(Uri.Author.V1_SINGLE)
+    @GetMapping(Uri.Author.V1.SINGLE)
     fun get(@PathVariable id: Int): Mono<AuthorDto.Response.Get> = authorService.get(id)
 
-    @GetMapping(Uri.Author.V1_COLLECTION)
+    @GetMapping(Uri.Author.V1.COLLECTION)
     fun getAll(): Flux<AuthorDto.Response.Get> = authorService.getAll()
 
-    @PostMapping(Uri.Author.V1_COLLECTION)
+    @PostMapping(Uri.Author.V1.COLLECTION)
     fun post(@RequestBody dto: AuthorDto.Request.Post): Mono<AuthorDto.Response.Get> = authorService.post(dto)
 
-    @PatchMapping(Uri.Author.V1_SINGLE)
+    @PatchMapping(Uri.Author.V1.SINGLE)
     fun patch(@PathVariable id: Int, @RequestBody dto: AuthorDto.Request.Patch): Mono<AuthorDto.Response.Get> =
         authorService.patch(id, dto)
 
-    @DeleteMapping(Uri.Author.V1_SINGLE)
+    @DeleteMapping(Uri.Author.V1.SINGLE)
     fun delete(@PathVariable id: Int) = authorService.delete(id)
 
 }
