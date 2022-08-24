@@ -45,6 +45,8 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
+
+    asciidoctor("org.springframework.restdocs:spring-restdocs-asciidoctor")
 }
 
 tasks.withType<KotlinCompile> {
@@ -65,4 +67,24 @@ tasks.test {
 tasks.asciidoctor {
     inputs.dir(snippetsDir)
     dependsOn(tasks.test)
+    doFirst {
+        delete {
+            file("src/main/resources/static/docs")
+        }
+    }
+}
+
+tasks.register("copyHTML", Copy::class) {
+    dependsOn(tasks.asciidoctor)
+    from(file("build/asciidoc/html5"))
+    into(file("src/main/resources/static/docs"))
+}
+
+tasks.build {
+    dependsOn(tasks.getByName("copyHTML"))
+}
+
+tasks.bootJar {
+    dependsOn(tasks.asciidoctor)
+    dependsOn(tasks.getByName("copyHTML"))
 }
