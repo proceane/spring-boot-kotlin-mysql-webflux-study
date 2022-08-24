@@ -47,6 +47,7 @@ dependencies {
     testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
 
     asciidoctor("org.springframework.restdocs:spring-restdocs-asciidoctor")
+    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 }
 
 tasks.withType<KotlinCompile> {
