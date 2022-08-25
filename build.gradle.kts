@@ -62,6 +62,7 @@ tasks.withType<Test> {
 }
 
 tasks.test {
+    useJUnitPlatform()
     outputs.dir(snippetsDir)
 }
 
