@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "2.7.2"
     id("io.spring.dependency-management") version "1.0.12.RELEASE"
-    id("org.asciidoctor.convert") version "1.5.8"
+    id("org.asciidoctor.jvm.convert") version "3.3.2"
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
 }
@@ -45,7 +45,6 @@ dependencies {
     testImplementation("io.projectreactor:reactor-test")
     testImplementation("org.springframework.restdocs:spring-restdocs-webtestclient")
 
-    asciidoctor("org.springframework.restdocs:spring-restdocs-asciidoctor")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 }
 
@@ -74,5 +73,10 @@ tasks.register("copyHTML", Copy::class) {
 
 tasks.build {
     dependsOn(tasks.asciidoctor)
+}
+
+tasks.bootJar {
+    dependsOn(tasks.asciidoctor)
     dependsOn(tasks.getByName("copyHTML"))
 }
+
