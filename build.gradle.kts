@@ -57,7 +57,6 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
-    outputs.dir(snippetsDir)
 }
 
 tasks.asciidoctor {
@@ -69,10 +68,6 @@ tasks.register("copyHTML", Copy::class) {
     dependsOn(tasks.findByName("asciidoctor"))
     from(file("build/asciidoc/html5"))
     into(file("src/main/resources/static/docs"))
-}
-
-tasks.build {
-    dependsOn(tasks.asciidoctor)
 }
 
 tasks.bootJar {
