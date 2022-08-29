@@ -66,8 +66,12 @@ tasks.asciidoctor {
 
 tasks.register("copyHTML", Copy::class) {
     dependsOn(tasks.findByName("asciidoctor"))
-    from(file("build/asciidoc/html5"))
+    from(file("build/docs/asciidoc"))
     into(file("src/main/resources/static/docs"))
+}
+
+tasks.build {
+    dependsOn(tasks.getByName("copyHTML"))
 }
 
 tasks.bootJar {
