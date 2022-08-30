@@ -1,0 +1,31 @@
+ifndef::snippets[]
+:snippets: build/generated-snippets
+endif::[]
+= {docname} API Document
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+//NOTE: ""
+
+//TIP: ""
+
+//IMPORTANT: ""
+
+//CAUTION: ""
+
+//WARNING: ""
+
+== Request
+=== Curl-Request
+include::{snippets}/{docname}/curl-request.adoc[]
+=== Http-Request
+include::{snippets}/{docname}/http-request.adoc[]
+== Response
+=== Http-Response
+include::{snippets}/{docname}/http-response.adoc[]
+=== Response-Body
+include::{snippets}/{docname}/response-body.adoc[]
