@@ -29,3 +29,5 @@ include::{snippets}/{docname}/http-request.adoc[]
 include::{snippets}/{docname}/http-response.adoc[]
 === Response-Body
 include::{snippets}/{docname}/response-body.adoc[]
+=== Response-Fields
+include::{snippets}/{docname}/response-fields.adoc[]
