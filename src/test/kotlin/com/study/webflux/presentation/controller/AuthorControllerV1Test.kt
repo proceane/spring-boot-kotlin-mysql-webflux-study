@@ -56,5 +56,26 @@ class AuthorControllerV1Test() {
             )
     }
 
+    @Test
+    fun getOne() {
+        webTestClient.get().uri("/v1/authors/1").accept(MediaType.APPLICATION_JSON)
+            .exchange()
+            .expectStatus()
+            .isOk()
+            .expectBody()
+            .consumeWith(
+                document(
+                    "author-get",
+                    responseFields(
+                        fieldWithPath("id").description("Author's idx"),
+                        fieldWithPath("name").description("Author's name"),
+                        fieldWithPath("email").description("Author's email"),
+                        fieldWithPath("birthdate").description("Author's birthday"),
+                        fieldWithPath("createdAt").description("The time the author data created")
+                    )
+                )
+            )
+    }
+
 
 }
