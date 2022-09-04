@@ -86,4 +86,14 @@ class AuthorControllerV1Test() {
 
     }
 
+    @Test
+    fun patch() {
+
+    }
+
+    @Test
+    fun delete() {
+
+    }
+
 }
