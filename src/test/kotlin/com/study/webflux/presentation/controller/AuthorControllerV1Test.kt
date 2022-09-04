@@ -1,5 +1,6 @@
 package com.study.webflux.presentation.controller
 
+import com.study.webflux.presentation.dto.AuthorDto
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -17,6 +18,9 @@ import org.springframework.test.context.TestConstructor
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.test.web.servlet.client.MockMvcWebTestClient
 import org.springframework.web.context.WebApplicationContext
+import org.springframework.web.reactive.function.BodyInserters
+import reactor.core.publisher.Mono
+import java.time.LocalDate
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -77,5 +81,9 @@ class AuthorControllerV1Test() {
             )
     }
 
+    @Test
+    fun post() {
+
+    }
 
 }
