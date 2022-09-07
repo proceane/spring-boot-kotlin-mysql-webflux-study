@@ -130,7 +130,11 @@ class AuthorControllerV1Test() {
 
     @Test
     fun delete() {
-
+        webTestClient.patch().uri("/v1/authors/1").accept(MediaType.APPLICATION_JSON)
+            .exchange()
+            .expectStatus()
+            .isOk()
+            .expectBody()
     }
 
 }
