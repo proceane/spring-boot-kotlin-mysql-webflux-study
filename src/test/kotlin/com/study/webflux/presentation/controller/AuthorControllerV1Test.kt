@@ -135,6 +135,11 @@ class AuthorControllerV1Test() {
             .expectStatus()
             .isOk()
             .expectBody()
+            .consumeWith(
+                document(
+                    "author-delete",
+                )
+            )
     }
 
 }
