@@ -1,9 +1,12 @@
 package com.study.webflux.presentation.controller
 
+import com.study.webflux.domain.author.Author
+import com.study.webflux.infra.repository.AuthorRepository
 import com.study.webflux.presentation.dto.AuthorDto
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
@@ -21,13 +24,14 @@ import org.springframework.web.context.WebApplicationContext
 import org.springframework.web.reactive.function.BodyInserters
 import reactor.core.publisher.Mono
 import java.time.LocalDate
+import java.util.function.Consumer
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @ExtendWith(RestDocumentationExtension::class)
-class AuthorControllerV1Test() {
+class AuthorControllerV1Test(@Autowired val authorRepository: AuthorRepository) {
 
     lateinit var webTestClient: WebTestClient
 
@@ -106,7 +110,6 @@ class AuthorControllerV1Test() {
 
     @Test
     fun patch() {
-        // given
         var requestBody: AuthorDto.Request.Patch = AuthorDto.Request.Patch("first", "last", "mail@mail.com", LocalDate.now())
 
         webTestClient.patch().uri("/v1/authors/1").accept(MediaType.APPLICATION_JSON)
@@ -135,6 +138,9 @@ class AuthorControllerV1Test() {
             .expectStatus()
             .isOk()
             .expectBody()
+            .consumeWith(
+                document("author-delete")
+            )
     }
 
 }
