@@ -61,7 +61,7 @@ class AuthorControllerV1Test() {
 
     @Test
     fun getOne() {
-        webTestClient.get().uri("/v1/authors/1").accept(MediaType.APPLICATION_JSON)
+        webTestClient.get().uri("/v1/authors/5").accept(MediaType.APPLICATION_JSON)
             .exchange()
             .expectStatus()
             .isOk()
@@ -109,7 +109,7 @@ class AuthorControllerV1Test() {
         // given
         var requestBody: AuthorDto.Request.Patch = AuthorDto.Request.Patch("first", "last", "mail@mail.com", LocalDate.now())
 
-        webTestClient.patch().uri("/v1/authors/1").accept(MediaType.APPLICATION_JSON)
+        webTestClient.patch().uri("/v1/authors/2").accept(MediaType.APPLICATION_JSON)
             .body(BodyInserters.fromValue(requestBody))
             .exchange()
             .expectStatus()
