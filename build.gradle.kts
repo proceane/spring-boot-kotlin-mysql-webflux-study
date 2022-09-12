@@ -66,7 +66,6 @@ tasks.asciidoctor {
 
 tasks.register("copyHTML", Copy::class) {
     dependsOn(tasks.findByName("asciidoctor"))
-    delete(file("src/main/resources/static/docs"))
     from(file("build/docs/asciidoc"))
     into(file("src/main/resources/static/docs"))
 }
