@@ -82,7 +82,7 @@ class AuthorControllerV1Test() {
 
     @Test
     fun post() {
-        var requestBody: AuthorDto.Request.Patch = AuthorDto.Request.Patch("first", "last", "mail2@mail.com", LocalDate.now())
+        var requestBody: AuthorDto.Request.Post = AuthorDto.Request.Post("first", "last", "mail2@mail.com", LocalDate.now())
 
         webTestClient.post().uri("/v1/authors").accept(MediaType.APPLICATION_JSON)
             .body(BodyInserters.fromValue(requestBody))
