@@ -1,9 +1,12 @@
 package com.study.webflux.presentation.controller
 
+import com.study.webflux.infra.repository.AuthorRepository
 import com.study.webflux.presentation.dto.AuthorDto
+import org.json.JSONObject
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
@@ -29,6 +32,9 @@ import java.time.LocalDate
 class AuthorControllerV1Test() {
 
     lateinit var webTestClient: WebTestClient
+
+    @Autowired
+    lateinit var authorRepository: AuthorRepository
 
     @BeforeEach
     fun setUp(context: WebApplicationContext, restDocumentation: RestDocumentationContextProvider) {
@@ -100,8 +106,13 @@ class AuthorControllerV1Test() {
                         fieldWithPath("birthdate").description("Author's birthday"),
                         fieldWithPath("createdAt").description("The time the author data created")
                     )
-                )
-            )
+                ))
+            .consumeWith { result ->
+                result.responseBody?.let {
+                    val jsonObject = JSONObject(String(it))
+                    authorRepository.deleteById(jsonObject.getInt("id")).subscribe()
+                }
+            }
     }
 
     @Test
