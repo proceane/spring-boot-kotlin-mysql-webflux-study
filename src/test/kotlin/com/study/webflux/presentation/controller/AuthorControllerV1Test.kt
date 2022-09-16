@@ -96,6 +96,8 @@ class AuthorControllerV1Test() {
             .expectStatus()
             .isOk()
             .expectBody()
+            .jsonPath("$.name").isEqualTo(requestBody.firstName + " " + requestBody.lastName)
+            .jsonPath("$.email").isEqualTo(requestBody.email)
             .consumeWith(
                 document(
                     "author-post",
