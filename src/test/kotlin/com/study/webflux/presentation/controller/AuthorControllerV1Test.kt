@@ -120,7 +120,8 @@ class AuthorControllerV1Test() {
     @Test
     fun patch() {
         // given
-        var requestBody: AuthorDto.Request.Patch = AuthorDto.Request.Patch("first", "last", "mail@mail.com", LocalDate.now())
+        val author = authorRepository.findById(2).block()
+        val requestBody: AuthorDto.Request.Patch = AuthorDto.Request.Patch("first", "last", "mail@mail.com", LocalDate.now())
 
         webTestClient.patch().uri("/v1/authors/2").accept(MediaType.APPLICATION_JSON)
             .body(BodyInserters.fromValue(requestBody))
@@ -128,6 +129,8 @@ class AuthorControllerV1Test() {
             .expectStatus()
             .isOk()
             .expectBody()
+            .jsonPath("$.name").isEqualTo(requestBody.firstName + " " + requestBody.lastName)
+            .jsonPath("$.email").isEqualTo("mail@mail.com")
             .consumeWith(
                 document(
                     "author-patch",
@@ -140,6 +143,9 @@ class AuthorControllerV1Test() {
                     )
                 )
             )
+            .consumeWith {
+                author?.let { authorRepository.save(it).subscribe() }
+            }
     }
 
     @Test
