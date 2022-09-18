@@ -150,8 +150,7 @@ class AuthorControllerV1Test() {
 
     @Test
     fun delete() {
-        val author = authorRepository.findById(1).block()
-        println(author)
+        val author = authorRepository.findById(1).block()?.copy()
 
         webTestClient.delete().uri("/v1/authors/1").accept(MediaType.APPLICATION_JSON)
             .exchange()
