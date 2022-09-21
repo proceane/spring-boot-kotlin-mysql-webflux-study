@@ -3,6 +3,7 @@ package com.study.webflux.presentation.controller
 import com.study.webflux.infra.repository.PostRepository
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
@@ -34,6 +35,31 @@ class PostControllerV1Test() {
             .configureClient()
             .filter(WebTestClientRestDocumentation.documentationConfiguration(restDocumentation))
             .build()
+    }
+
+    @Test
+    fun getAll() {
+
+    }
+
+    @Test
+    fun getOne() {
+
+    }
+
+    @Test
+    fun post() {
+
+    }
+
+    @Test
+    fun patch() {
+
+    }
+
+    @Test
+    fun delete() {
+
     }
 
 }
