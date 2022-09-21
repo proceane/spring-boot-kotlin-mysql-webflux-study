@@ -1,5 +1,6 @@
 package com.study.webflux.presentation.controller
 
+import com.study.webflux.domain.author.Author
 import com.study.webflux.infra.repository.AuthorRepository
 import com.study.webflux.presentation.dto.AuthorDto
 import org.json.JSONObject
@@ -163,7 +164,11 @@ class AuthorControllerV1Test() {
                 )
             )
             .consumeWith {
-                author?.let { authorRepository.save(it).subscribe() }
+                author?.let {
+                    val saveAuthor: Author =
+                        Author.createAuthor(it.firstName, it.lastName, it.email, it.birthDate)
+                    authorRepository.save(saveAuthor).subscribe()
+                }
             }
     }
 
