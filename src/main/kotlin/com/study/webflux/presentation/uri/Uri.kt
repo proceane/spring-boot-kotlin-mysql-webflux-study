@@ -10,4 +10,14 @@ class Uri {
             }
         }
     }
+
+    class Post {
+        class V1 {
+            companion object {
+                private const val V1 = "/v1"
+                const val COLLECTION = "$V1/posts"
+                const val SINGLE = "$COLLECTION/{id}"
+            }
+        }
+    }
 }
