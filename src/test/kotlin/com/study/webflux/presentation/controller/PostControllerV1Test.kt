@@ -64,6 +64,25 @@ class PostControllerV1Test() {
 
     @Test
     fun getOne() {
+        webTestClient.get().uri("/v1/posts/5").accept(MediaType.APPLICATION_JSON)
+            .exchange()
+            .expectStatus()
+            .isOk()
+            .expectBody()
+            .consumeWith(
+                WebTestClientRestDocumentation.document(
+                    "post-get",
+                    PayloadDocumentation.responseFields(
+                        PayloadDocumentation.fieldWithPath("id").description("Post's idx"),
+                        PayloadDocumentation.fieldWithPath("authorId").description("Post's authorId"),
+                        PayloadDocumentation.fieldWithPath("title").description("Post's title"),
+                        PayloadDocumentation.fieldWithPath("description").description("Post's description"),
+                        PayloadDocumentation.fieldWithPath("content").description("Post's content"),
+                        PayloadDocumentation.fieldWithPath("createdAt")
+                            .description("The time the post data created")
+                    )
+                )
+            )
 
     }
 
