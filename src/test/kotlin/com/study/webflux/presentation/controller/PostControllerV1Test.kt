@@ -1,7 +1,8 @@
 package com.study.webflux.presentation.controller
 
 import com.study.webflux.infra.repository.PostRepository
-import org.junit.jupiter.api.Assertions.*
+import com.study.webflux.presentation.dto.PostDto
+import org.json.JSONObject
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -18,6 +19,7 @@ import org.springframework.test.context.TestConstructor
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.test.web.servlet.client.MockMvcWebTestClient
 import org.springframework.web.context.WebApplicationContext
+import org.springframework.web.reactive.function.BodyInserters
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -88,6 +90,36 @@ class PostControllerV1Test() {
 
     @Test
     fun post() {
+        var requestBody: PostDto.Request.Post = PostDto.Request.Post("title", "description", "content")
+
+        webTestClient.post().uri("/v1/posts").accept(MediaType.APPLICATION_JSON)
+            .body(BodyInserters.fromValue(requestBody))
+            .exchange()
+            .expectStatus()
+            .isOk()
+            .expectBody()
+            .jsonPath("$.title").isEqualTo(requestBody.title)
+            .jsonPath("$.description").isEqualTo(requestBody.description)
+            .jsonPath("$.content").isEqualTo(requestBody.content)
+            .consumeWith(
+                WebTestClientRestDocumentation.document(
+                    "post-post",
+                    PayloadDocumentation.responseFields(
+                        PayloadDocumentation.fieldWithPath("id").description("Post's idx"),
+                        PayloadDocumentation.fieldWithPath("authorId").description("Post's authorId"),
+                        PayloadDocumentation.fieldWithPath("title").description("Post's title"),
+                        PayloadDocumentation.fieldWithPath("description").description("Post's description"),
+                        PayloadDocumentation.fieldWithPath("content").description("Post's content"),
+                        PayloadDocumentation.fieldWithPath("createdAt")
+                            .description("The time the post data created")
+                    )
+                ))
+            .consumeWith { result ->
+                result.responseBody?.let {
+                    val jsonObject = JSONObject(String(it))
+                    postRepository.deleteById(jsonObject.getInt("id")).subscribe()
+                }
+            }
 
     }
 
