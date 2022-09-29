@@ -1,6 +1,7 @@
 package com.study.webflux.presentation.controller
 
 import com.study.webflux.infra.repository.PostRepository
+import com.study.webflux.presentation.dto.AuthorDto
 import com.study.webflux.presentation.dto.PostDto
 import org.json.JSONObject
 import org.junit.jupiter.api.BeforeEach
@@ -20,6 +21,7 @@ import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.test.web.servlet.client.MockMvcWebTestClient
 import org.springframework.web.context.WebApplicationContext
 import org.springframework.web.reactive.function.BodyInserters
+import java.time.LocalDate
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -125,6 +127,36 @@ class PostControllerV1Test() {
 
     @Test
     fun patch() {
+        // given
+        val post = postRepository.findById(2).block()
+        val requestBody: PostDto.Request.Patch = PostDto.Request.Patch("title_update", "description_update", "content_update")
+
+        webTestClient.patch().uri("/v1/posts/2").accept(MediaType.APPLICATION_JSON)
+            .body(BodyInserters.fromValue(requestBody))
+            .exchange()
+            .expectStatus()
+            .isOk()
+            .expectBody()
+            .jsonPath("$.title").isEqualTo(requestBody.title!!)
+            .jsonPath("$.description").isEqualTo(requestBody.description!!)
+            .jsonPath("$.content").isEqualTo(requestBody.content!!)
+            .consumeWith(
+                WebTestClientRestDocumentation.document(
+                    "post-patch",
+                    PayloadDocumentation.responseFields(
+                        PayloadDocumentation.fieldWithPath("id").description("Post's idx"),
+                        PayloadDocumentation.fieldWithPath("authorId").description("Post's authorId"),
+                        PayloadDocumentation.fieldWithPath("title").description("Post's title"),
+                        PayloadDocumentation.fieldWithPath("description").description("Post's description"),
+                        PayloadDocumentation.fieldWithPath("content").description("Post's content"),
+                        PayloadDocumentation.fieldWithPath("createdAt")
+                            .description("The time the post data created")
+                    )
+                )
+            )
+            .consumeWith {
+                post?.let { postRepository.save(it).subscribe() }
+            }
 
     }
 
