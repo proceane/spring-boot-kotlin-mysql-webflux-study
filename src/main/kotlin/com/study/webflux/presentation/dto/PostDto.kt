@@ -7,6 +7,7 @@ class PostDto {
 
     class Request {
         data class Post(
+            var authorId: Int,
             var title: String,
             var description: String,
             var content: String,
