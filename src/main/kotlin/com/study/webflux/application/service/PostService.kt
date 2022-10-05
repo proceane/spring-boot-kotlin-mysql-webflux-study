@@ -11,21 +11,21 @@ import reactor.core.publisher.Mono
 class PostService(val postRepository: PostRepository) {
 
     fun get(id: Int): Mono<PostDto.Response.Get> = postRepository.findById(id)
-        .map { PostDto.Response.Get.of(it) }
+        .map { PostDto.Response.Get.of(it, "") }
 
     fun getAll(): Flux<PostDto.Response.Get> = postRepository.findAll()
-        .map { PostDto.Response.Get.of(it) }
+        .map { PostDto.Response.Get.of(it, "") }
 
     fun post(dto: PostDto.Request.Post): Mono<PostDto.Response.Get> {
         return postRepository.save(Post.createPost(dto.authorId, dto.title, dto.description, dto.content))
-            .map { PostDto.Response.Get.of(it) }
+            .map { PostDto.Response.Get.of(it, "") }
     }
 
     fun patch(id: Int, dto: PostDto.Request.Patch): Mono<PostDto.Response.Get> {
         return postRepository.findById(id).flatMap {
             it.updatePost(dto.title, dto.description, dto.content)
             postRepository.save(it)
-        }.map { PostDto.Response.Get.of(it) }
+        }.map { PostDto.Response.Get.of(it, "") }
     }
     
     fun delete(id: Int) {
