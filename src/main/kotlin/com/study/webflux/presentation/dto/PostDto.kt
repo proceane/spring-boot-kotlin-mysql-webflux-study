@@ -24,15 +24,26 @@ class PostDto {
         data class Get(
             val id: Int?,
             var authorId: Int,
+            var authorName: String,
             var title: String,
             var description: String,
             var content: String,
             var createdAt: LocalDateTime
         ) {
             companion object {
-                fun of(post: Post): Get = Get(
+//                fun of(post: Post): Get = Get(
+//                    post.id,
+//                    post.authorId,
+//                    post.title,
+//                    post.description,
+//                    post.content,
+//                    post.createdAt
+//                )
+
+                fun of(post: Post, authorName: String): Get = Get(
                     post.id,
                     post.authorId,
+                    authorName,
                     post.title,
                     post.description,
                     post.content,
