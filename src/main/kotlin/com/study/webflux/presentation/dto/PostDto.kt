@@ -31,15 +31,6 @@ class PostDto {
             var createdAt: LocalDateTime
         ) {
             companion object {
-//                fun of(post: Post): Get = Get(
-//                    post.id,
-//                    post.authorId,
-//                    post.title,
-//                    post.description,
-//                    post.content,
-//                    post.createdAt
-//                )
-
                 fun of(post: Post, authorName: String): Get = Get(
                     post.id,
                     post.authorId,
