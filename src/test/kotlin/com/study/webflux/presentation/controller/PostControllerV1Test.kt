@@ -53,6 +53,7 @@ class PostControllerV1Test() {
                     PayloadDocumentation.responseFields(
                         PayloadDocumentation.fieldWithPath("[].id").description("Post's idx"),
                         PayloadDocumentation.fieldWithPath("[].authorId").description("Post's authorId"),
+                        PayloadDocumentation.fieldWithPath("[].authorName").description("Post's authorName"),
                         PayloadDocumentation.fieldWithPath("[].title").description("Post's title"),
                         PayloadDocumentation.fieldWithPath("[].description").description("Post's description"),
                         PayloadDocumentation.fieldWithPath("[].content").description("Post's content"),
@@ -76,6 +77,7 @@ class PostControllerV1Test() {
                     PayloadDocumentation.responseFields(
                         PayloadDocumentation.fieldWithPath("id").description("Post's idx"),
                         PayloadDocumentation.fieldWithPath("authorId").description("Post's authorId"),
+                        PayloadDocumentation.fieldWithPath("authorName").description("Post's authorName"),
                         PayloadDocumentation.fieldWithPath("title").description("Post's title"),
                         PayloadDocumentation.fieldWithPath("description").description("Post's description"),
                         PayloadDocumentation.fieldWithPath("content").description("Post's content"),
@@ -108,6 +110,7 @@ class PostControllerV1Test() {
                     PayloadDocumentation.responseFields(
                         PayloadDocumentation.fieldWithPath("id").description("Post's idx"),
                         PayloadDocumentation.fieldWithPath("authorId").description("Post's authorId"),
+                        PayloadDocumentation.fieldWithPath("authorName").description("Post's authorName"),
                         PayloadDocumentation.fieldWithPath("title").description("Post's title"),
                         PayloadDocumentation.fieldWithPath("description").description("Post's description"),
                         PayloadDocumentation.fieldWithPath("content").description("Post's content"),
