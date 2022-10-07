@@ -30,4 +30,8 @@ data class Author(
         email?.let { this.email = email }
         birthDate?.let { this.birthDate = birthDate }
     }
+
+    fun getName() : String {
+        return "$firstName $lastName"
+    }
 }
