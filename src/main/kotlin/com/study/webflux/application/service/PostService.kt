@@ -31,6 +31,7 @@ class PostService(val postRepository: PostRepository, val authorRepository: Auth
     }
 
     fun getResponse(mono: Mono<Post>): Mono<PostDto.Response.Get> {
-        return mono.map { PostDto.Response.Get.of(it, "") }
+        return mono.flatMap { post -> authorRepository.findById(post.authorId)
+            .map { author -> PostDto.Response.Get.of(post, author.getName()) }}
     }
 }
