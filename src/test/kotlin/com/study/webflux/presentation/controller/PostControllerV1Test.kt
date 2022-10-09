@@ -52,7 +52,6 @@ class PostControllerV1Test() {
                     "post-get-all",
                     PayloadDocumentation.responseFields(
                         PayloadDocumentation.fieldWithPath("[].id").description("Post's idx"),
-                        PayloadDocumentation.fieldWithPath("[].authorId").description("Post's authorId"),
                         PayloadDocumentation.fieldWithPath("[].authorName").description("Post's authorName"),
                         PayloadDocumentation.fieldWithPath("[].title").description("Post's title"),
                         PayloadDocumentation.fieldWithPath("[].description").description("Post's description"),
@@ -76,7 +75,6 @@ class PostControllerV1Test() {
                     "post-get",
                     PayloadDocumentation.responseFields(
                         PayloadDocumentation.fieldWithPath("id").description("Post's idx"),
-                        PayloadDocumentation.fieldWithPath("authorId").description("Post's authorId"),
                         PayloadDocumentation.fieldWithPath("authorName").description("Post's authorName"),
                         PayloadDocumentation.fieldWithPath("title").description("Post's title"),
                         PayloadDocumentation.fieldWithPath("description").description("Post's description"),
@@ -109,7 +107,6 @@ class PostControllerV1Test() {
                     "post-patch",
                     PayloadDocumentation.responseFields(
                         PayloadDocumentation.fieldWithPath("id").description("Post's idx"),
-                        PayloadDocumentation.fieldWithPath("authorId").description("Post's authorId"),
                         PayloadDocumentation.fieldWithPath("authorName").description("Post's authorName"),
                         PayloadDocumentation.fieldWithPath("title").description("Post's title"),
                         PayloadDocumentation.fieldWithPath("description").description("Post's description"),

@@ -23,7 +23,6 @@ class PostDto {
     class Response {
         data class Get(
             val id: Int?,
-            var authorId: Int,
             var authorName: String,
             var title: String,
             var description: String,
@@ -33,7 +32,6 @@ class PostDto {
             companion object {
                 fun of(post: Post, authorName: String): Get = Get(
                     post.id,
-                    post.authorId,
                     authorName,
                     post.title,
                     post.description,
