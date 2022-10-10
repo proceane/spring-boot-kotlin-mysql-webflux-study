@@ -26,7 +26,7 @@ import org.springframework.web.reactive.function.BodyInserters
 @AutoConfigureRestDocs
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @ExtendWith(RestDocumentationExtension::class)
-class PostControllerV1Test() {
+class PostControllerV1Test {
 
     lateinit var webTestClient: WebTestClient
 
@@ -46,7 +46,7 @@ class PostControllerV1Test() {
         webTestClient.get().uri("/v1/posts").accept(MediaType.APPLICATION_JSON)
             .exchange()
             .expectStatus()
-            .isOk()
+            .isOk
             .expectBody()
             .consumeWith(
                 WebTestClientRestDocumentation.document(
@@ -69,7 +69,7 @@ class PostControllerV1Test() {
         webTestClient.get().uri("/v1/posts/5").accept(MediaType.APPLICATION_JSON)
             .exchange()
             .expectStatus()
-            .isOk()
+            .isOk
             .expectBody()
             .consumeWith(
                 WebTestClientRestDocumentation.document(
@@ -98,7 +98,7 @@ class PostControllerV1Test() {
             .body(BodyInserters.fromValue(requestBody))
             .exchange()
             .expectStatus()
-            .isOk()
+            .isOk
             .expectBody()
             .jsonPath("$.title").isEqualTo(requestBody.title!!)
             .jsonPath("$.description").isEqualTo(requestBody.description!!)
@@ -130,7 +130,7 @@ class PostControllerV1Test() {
         webTestClient.delete().uri("/v1/posts/1").accept(MediaType.APPLICATION_JSON)
             .exchange()
             .expectStatus()
-            .isOk()
+            .isOk
             .expectBody()
             .consumeWith(
                 WebTestClientRestDocumentation.document(
