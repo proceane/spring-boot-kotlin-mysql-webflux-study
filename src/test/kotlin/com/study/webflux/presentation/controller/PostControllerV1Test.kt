@@ -1,5 +1,6 @@
 package com.study.webflux.presentation.controller
 
+import com.study.webflux.domain.post.Post
 import com.study.webflux.infra.repository.PostRepository
 import com.study.webflux.presentation.dto.PostDto
 import org.junit.jupiter.api.BeforeEach
@@ -135,7 +136,13 @@ class PostControllerV1Test() {
                 WebTestClientRestDocumentation.document(
                     "post-delete",
                 )
-            )
+            ).consumeWith {
+                post?.let {
+                    val savePost: Post =
+                        Post.createPost(it.authorId, it.title, it.description, it.content)
+                    postRepository.save(savePost).subscribe()
+                }
+            }
 
     }
 
