@@ -30,7 +30,7 @@ import java.time.LocalDate
 @AutoConfigureRestDocs
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @ExtendWith(RestDocumentationExtension::class)
-class AuthorControllerV1Test() {
+class AuthorControllerV1Test {
 
     lateinit var webTestClient: WebTestClient
 
@@ -50,7 +50,7 @@ class AuthorControllerV1Test() {
         webTestClient.get().uri("/v1/authors").accept(MediaType.APPLICATION_JSON)
             .exchange()
             .expectStatus()
-            .isOk()
+            .isOk
             .expectBody()
             .consumeWith(
                 document(
@@ -71,7 +71,7 @@ class AuthorControllerV1Test() {
         webTestClient.get().uri("/v1/authors/5").accept(MediaType.APPLICATION_JSON)
             .exchange()
             .expectStatus()
-            .isOk()
+            .isOk
             .expectBody()
             .consumeWith(
                 document(
@@ -89,13 +89,13 @@ class AuthorControllerV1Test() {
 
     @Test
     fun post() {
-        var requestBody: AuthorDto.Request.Post = AuthorDto.Request.Post("first", "last", "mail2@mail.com", LocalDate.now())
+        val requestBody: AuthorDto.Request.Post = AuthorDto.Request.Post("first", "last", "mail2@mail.com", LocalDate.now())
 
         webTestClient.post().uri("/v1/authors").accept(MediaType.APPLICATION_JSON)
             .body(BodyInserters.fromValue(requestBody))
             .exchange()
             .expectStatus()
-            .isOk()
+            .isOk
             .expectBody()
             .jsonPath("$.name").isEqualTo(requestBody.firstName + " " + requestBody.lastName)
             .jsonPath("$.email").isEqualTo(requestBody.email)
@@ -128,7 +128,7 @@ class AuthorControllerV1Test() {
             .body(BodyInserters.fromValue(requestBody))
             .exchange()
             .expectStatus()
-            .isOk()
+            .isOk
             .expectBody()
             .jsonPath("$.name").isEqualTo(requestBody.firstName + " " + requestBody.lastName)
             .jsonPath("$.email").isEqualTo("mail@mail.com")
@@ -156,7 +156,7 @@ class AuthorControllerV1Test() {
         webTestClient.delete().uri("/v1/authors/1").accept(MediaType.APPLICATION_JSON)
             .exchange()
             .expectStatus()
-            .isOk()
+            .isOk
             .expectBody()
             .consumeWith(
                 document(
