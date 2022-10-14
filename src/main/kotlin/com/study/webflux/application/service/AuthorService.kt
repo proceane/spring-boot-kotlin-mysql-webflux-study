@@ -4,6 +4,8 @@ import com.study.webflux.config.exception.CustomException
 import com.study.webflux.domain.author.Author
 import com.study.webflux.infra.repository.AuthorRepository
 import com.study.webflux.presentation.dto.AuthorDto
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
@@ -18,6 +20,9 @@ class AuthorService(val authorRepository: AuthorRepository) {
 
     fun getAll(): Flux<AuthorDto.Response.Get> = authorRepository.findAll()
         .map { AuthorDto.Response.Get.of(it) }
+
+    fun getAll(pageable: Pageable): Mono<Page<AuthorDto.Response.Get>> = authorRepository.findAll(pageable)
+        .map { it.map { author -> AuthorDto.Response.Get.of(author) } }
 
     fun post(dto: AuthorDto.Request.Post): Mono<AuthorDto.Response.Get> {
         return authorRepository.save(Author.createAuthor(dto.firstName, dto.lastName, dto.email, dto.birthDate))
